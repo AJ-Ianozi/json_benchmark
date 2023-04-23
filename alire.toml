@@ -1,0 +1,21 @@
+name = "json_benchmark"
+description = "Just a benchmark for json stuff"
+version = "0.1.0-dev"
+licenses = "GPL-3.0-only"
+
+authors = ["A.J. Ianozi"]
+maintainers = ["A.J. Ianozi <aj@ianozi.com>"]
+maintainers-logins = ["AJ-Ianozi"]
+
+executables = ["json_benchmark"]
+
+# uncomment this to allow for -O0
+#[build-switches]
+#"*".optimization = ["-O0"]
+
+[[depends-on]]
+vss = "^23.0.0"
+[[depends-on]]
+json = "^5.0.3"
+[[depends-on]]
+gnatcoll = "^23.0.0"
