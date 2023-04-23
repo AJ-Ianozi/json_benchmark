@@ -1,4 +1,4 @@
-# Json benchmark for Ada
+# JSON benchmark for Ada
 
 This is just a simple json benchmark utilizing [json-ada](https://github.com/onox/json-ada) and [GNATCOLL.JSON](https://github.com/adacore/gnatcoll-core).  VSS.json is also included in the alire project, but not used.
 
