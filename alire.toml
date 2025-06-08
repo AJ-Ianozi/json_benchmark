@@ -14,8 +14,6 @@ executables = ["json_benchmark"]
 #"*".optimization = ["-O0"]
 
 [[depends-on]]
-vss = "^23.0.0"
-[[depends-on]]
-json = "^5.0.3"
-[[depends-on]]
-gnatcoll = "^23.0.0"
+json = "^6.0.0"
+gnatcoll = "^25.0.0"
+vss = "^25.0.0"
