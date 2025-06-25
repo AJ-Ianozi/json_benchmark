@@ -27,7 +27,7 @@ It times how long it takes to parse / load the JSON data, how long it takes to g
 
 ## How to use it
 
-If you want to build it, you can also clone this repository, `cd` to the directory, then build it with `alr update && alr build` in Alire.
+If you want to build it, you can also clone this repository, `cd` to the directory, then build it with `alr update && alr build --release` in Alire.
 
 After that, you must **unzip** the `large-file.zip` file to `large-file.json`.
 
@@ -39,17 +39,17 @@ This was the results on my computer, which is an M2 MacBook Air with 16GB of ram
 
 ```
 Testing json-ada's JSON
-json-ada read is  2.274622000 seconds
-json-ada seek is  0.001402000 seconds
-json-ada iter is  0.008116000 seconds
+json-ada read is  1.868145000 seconds
+json-ada seek is  0.000051000 seconds
+json-ada iter is  0.007163000 seconds
 Testing GNATCOLL's JSON
-GNATCOLL.JSON read is  5.622553000 seconds
-GNATCOLL.JSON seek is  0.005264000 seconds
-GNATCOLL.JSON iter is  0.004949000 seconds
+GNATCOLL.JSON read is  5.373627000 seconds
+GNATCOLL.JSON seek is  0.000313000 seconds
+GNATCOLL.JSON iter is  0.008158000 seconds
 Testing VSS's JSON
-VSS.JSON read is  11.717198000 seconds
-VSS.JSON seek is  31.041688000 seconds
-VSS.JSON iter is  2.125321000 seconds
+VSS.JSON read is  0.174583000 seconds
+VSS.JSON seek is  31.209026000 seconds
+VSS.JSON iter is  3.106500000 seconds
 ```
 
 json-ada and GNATCOLL.JSON both use standard dictionary lookups, but VSS's json system is loads things into a stream that you have to manually parse afterwards, so it's more complicated, and there's probably a better way to do that section.  If someone wants to try and get the VSS.JSON one faster, please let me know!
