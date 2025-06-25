@@ -19,6 +19,7 @@ with Ada.Command_Line;           use Ada.Command_Line;
 with Ada.Strings.Unbounded;      use Ada.Strings.Unbounded;
 with Ada.Characters.Latin_1;     use Ada.Characters.Latin_1;
 with Ada.Characters.Conversions; use Ada.Characters.Conversions;
+with Ada.Streams;
 
 with JSON.Streams;
 
@@ -31,9 +32,8 @@ with VSS.Stream_Element_Vectors;
 with VSS.Strings.Conversions;
 with VSS.Strings.Converters;
 with VSS.Strings.Converters.Encoders;
---with VSS.String_Vectors;
 with VSS.Text_Streams.Memory_UTF8_Input;
---with VSS.Stream_Element_Vectors.Conversions;
+with VSS.Stream_Element_Vectors.Conversions;
 
 with GNATCOLL.JSON;
 with JSON.Parsers;
@@ -71,11 +71,6 @@ procedure Json_Benchmark is
    end Read_File;
    --  For gnatcoll
    JSON_String : constant String := Read_File (JSON_Path);
-
-   --  for VSS
-   JSON_VSS    : constant VSS.Strings.Virtual_String :=
-                     VSS.Strings.To_Virtual_String
-                        (To_Wide_Wide_String (JSON_String));
 
    --  For json_ada (I cannot just pass the string due to stack overflow)
    JSON_Stream : constant JSON.Streams.Stream_Element_Array_Access :=
@@ -308,7 +303,11 @@ begin
    begin
       Encoder.Initialize ("utf-8", [Stateless => True, others => False]);
       declare
-         Items  : constant Stream_Element_Vector := Encoder.Encode (JSON_VSS);
+         Overlay : Ada.Streams.Stream_Element_Array (1 .. JSON_String'Length)
+           with Import, Address => JSON_String'Address;
+         Items  : constant Stream_Element_Vector :=
+           VSS.Stream_Element_Vectors.Conversions.To_Stream_Element_Vector
+             (Overlay);
          Stream : aliased
             VSS.Text_Streams.Memory_UTF8_Input.Memory_UTF8_Input_Stream;
          Reader : VSS.JSON.Pull_Readers.Simple.JSON_Simple_Pull_Reader;
